@@ -1,30 +1,29 @@
 import  pprint
 
 def introspection_info(obj):
-    # Получаем тип объекта
+    # Определение типа объекта
     obj_type = type(obj).__name__
 
-    # Получаем атрибуты объекта
+    # Получение атрибутов объекта
     attributes = dir(obj)
 
-    # Получаем методы объекта
-    methods = [attr for attr in attributes if callable(getattr(obj, attr))]
+    # Получение методов объекта
+    methods = [method for method in attributes if callable(getattr(obj, method))]
 
-    # Получаем модуль, к которому принадлежит объект
-    obj_module = obj.__mod__
+    # Определение модуля, к которому объект принадлежит
+    module = obj.__class__.__mod__
 
-    # Создаем словарь с информацией об объекте
-    info = {
-        'type': obj_type,
-        'attributes': attributes,
-        'methods': methods,
-        'module': obj_module
-    }
+
+    # Создание словаря с информацией об объекте
+    info = {'type': obj_type,
+            'attributes': attributes,
+            'methods': methods,
+            'module': module},
+            # 'other_properties': other_properties}
 
     return info
 
-
-# Пример использования функции
+# Интроспекция числа
 number_info = introspection_info(42)
 pprint.pprint(number_info)
 
